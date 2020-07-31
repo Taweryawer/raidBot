@@ -8,6 +8,7 @@ import org.telegram.telegrambots.bots.DefaultAbsSender;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import taweryawer.service.KeyboardService;
 import taweryawer.service.UserService;
 import taweryawer.statemachine.ActionFailedException;
 import taweryawer.statemachine.UserEvents;
@@ -20,6 +21,9 @@ public class PersistFriendCodeAction implements Action<UserStates, UserEvents> {
     @Autowired
     UserService userService;
 
+    @Autowired
+    KeyboardService keyboardService;
+
     @Override
     public void execute(StateContext<UserStates, UserEvents> context) {
         try {
@@ -29,7 +33,9 @@ public class PersistFriendCodeAction implements Action<UserStates, UserEvents> {
             String telegramId = update.getMessage().getFrom().getId().toString();
             if (text.matches("\\d{12}")) {
                 userService.changeUserFriendCode(text, telegramId);
-                bot.execute(new SendMessage(telegramId, "You've successfully set your friend code to " + text + "\nYou're all ready! Make sure to set all your preferences in settings tab, good luck"));
+                SendMessage message = new SendMessage(telegramId, "You've successfully set your friend code to " + text + "\nYou're all ready! Make sure to set all your preferences in settings tab, good luck");
+                message.setReplyMarkup(keyboardService.getMainKeyboard());
+                bot.execute(message);
             } else {
                 bot.execute(new SendMessage(telegramId, "Your friend code is in wrong format, make sure it's 12 letters without whitespaces!"));
                 throw new WrongFriendCodeFormatException();

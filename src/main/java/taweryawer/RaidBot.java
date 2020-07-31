@@ -8,6 +8,7 @@ import org.springframework.statemachine.StateMachine;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import taweryawer.entities.User;
 import taweryawer.service.MessageBuilderBuilder;
 import taweryawer.statemachine.UserEvents;
 import taweryawer.statemachine.UserStates;

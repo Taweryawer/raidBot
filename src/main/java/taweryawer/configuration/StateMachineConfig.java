@@ -57,7 +57,16 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<UserSt
                     .source(UserStates.ENTERING_NICKNAME).target(UserStates.ENTERING_CODE).event(UserEvents.MESSAGE).action(actionFactory.persistNicknameAction(), actionFactory.errorAction())
                     .and()
                 .withExternal()
-                    .source(UserStates.ENTERING_CODE).target(UserStates.NORMAL).event(UserEvents.MESSAGE).action(actionFactory.friendCodeAction(), actionFactory.errorAction());
+                    .source(UserStates.ENTERING_CODE).target(UserStates.NORMAL).event(UserEvents.MESSAGE).action(actionFactory.friendCodeAction(), actionFactory.errorAction())
+                    .and()
+                .withInternal()
+                    .source(UserStates.NORMAL).event(UserEvents.MESSAGE).action(actionFactory.messageAction(), actionFactory.errorAction())
+                    .and()
+                .withInternal()
+                    .source(UserStates.NORMAL).event(UserEvents.PROFILE).action(actionFactory.profileAction(), actionFactory.errorAction())
+                    .and()
+                .withInternal()
+                    .source(UserStates.NORMAL).event(UserEvents.USER_CREATED).action(actionFactory.showMainKeyboardAction(), actionFactory.errorAction());
     }
 
 
