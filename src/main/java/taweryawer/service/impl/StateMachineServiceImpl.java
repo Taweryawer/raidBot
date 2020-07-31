@@ -1,4 +1,4 @@
-package taweryawer.service;
+package taweryawer.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.statemachine.StateMachine;
@@ -6,6 +6,7 @@ import org.springframework.statemachine.StateMachineContext;
 import org.springframework.statemachine.config.StateMachineFactory;
 import org.springframework.statemachine.data.jpa.JpaRepositoryStateMachinePersist;
 import org.springframework.stereotype.Service;
+import taweryawer.service.StateMachineService;
 import taweryawer.statemachine.UserEvents;
 import taweryawer.statemachine.UserStates;
 
