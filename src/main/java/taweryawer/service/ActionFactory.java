@@ -2,10 +2,7 @@ package taweryawer.service;
 
 import org.springframework.beans.factory.annotation.Lookup;
 import org.springframework.stereotype.Service;
-import taweryawer.handlers.ErrorAction;
-import taweryawer.handlers.PersistFriendCodeAction;
-import taweryawer.handlers.PersistNicknameAction;
-import taweryawer.handlers.ShowEnterNicknameAction;
+import taweryawer.handlers.*;
 
 @Service
 public class ActionFactory {
@@ -27,6 +24,19 @@ public class ActionFactory {
 
     @Lookup
     public PersistFriendCodeAction friendCodeAction(){
+        return null;
+    }
+
+    @Lookup
+    public MessageAction messageAction() { return null; }
+
+    @Lookup
+    public ProfileAction profileAction() {
+        return null;
+    }
+
+    @Lookup
+    public ShowMainKeyboardAction showMainKeyboardAction() {
         return null;
     }
 }

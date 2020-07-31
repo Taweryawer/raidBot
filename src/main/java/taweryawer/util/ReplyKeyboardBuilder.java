@@ -25,6 +25,7 @@ public class ReplyKeyboardBuilder {
     public ReplyKeyboardMarkup build() {
         keyboard.add(currentRow);
         ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup(keyboard);
+        markup.setResizeKeyboard(true);
         currentRow = new KeyboardRow();
         keyboard = new ArrayList<>();
         return markup;
